@@ -1,0 +1,260 @@
+public class JavaVarargsSimpleAddition {
+	public void add(int... a) {
+		String b = "";
+		int c = 0;
+		for (int i : a) {
+			b += i + "+";
+			c += i;
+		}
+		System.out.print(b.substring(0, b.length() - 1));
+		System.out.println("=" + c);
+  } 
+  
+  
+  // new program
+  import java.util.Scanner;
+interface AdvancedArithmetic{
+	   int divisorSum(int n);
+	}
+//renamed Calculator class to Calculator2 class as its already present in Day17 question
+class Calculator2 implements AdvancedArithmetic{
+    
+    public int divisorSum(int n){
+        if(n==1)return 1;
+       int sum=1+n,r=0;
+        for(int i=2;i<n;i++){
+         
+            r=n%i;
+            if(r==0){
+                sum=sum+i;
+            }
+        }
+        return sum;
+    }
+    
+}
+public class Day19Interfaces {
+	 public static void main(String[] args) {
+	        Scanner scan = new Scanner(System.in);
+	        int n = scan.nextInt();
+	        scan.close();
+	        
+	      	AdvancedArithmetic myCalculator = new Calculator2(); 
+	        int sum = myCalculator.divisorSum(n);
+	        System.out.println("I implemented: " + myCalculator.getClass().getInterfaces()[0].getName() );
+	        System.out.println(sum);
+	    }
+	} 
+  
+  
+  
+  
+  // new programe 
+  import java.util.Scanner;
+
+public class Day20Sorting {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt();
+		int a[] = new int[n];
+		for (int a_i = 0; a_i < n; a_i++) {
+			a[a_i] = in.nextInt();
+		}
+		in.close();
+		int count = 0;
+		boolean swapped = true;
+		for (int j = a.length - 1; (j >= 0 && swapped); j--) {
+			swapped = false;
+			for (int k = 0; k < j; k++) {
+
+				if (a[k] > a[k + 1]) {
+					int temp = a[k];
+					count++;
+					a[k] = a[k + 1];
+					a[k + 1] = temp;
+					swapped = true;
+				}
+			}
+		}
+		System.out.println("Array is sorted in " + count + " swaps.");
+		System.out.println("First Element: " + a[0]);
+		System.out.println("Last Element: " + a[a.length - 1]);
+
+	}
+}  
+
+
+// new program 
+import java.security.Permission;
+import java.util.Scanner;
+
+interface Food {
+	public String getType();
+}
+
+class Pizza implements Food {
+	public String getType() {
+		return "Someone ordered a Fast Food!";
+	}
+}
+
+class Cake implements Food {
+
+	public String getType() {
+		return "Someone ordered a Dessert!";
+	}
+}
+
+class FoodFactory {
+	public Food getFood(String order) {
+
+		/**
+		 * main code starts from here
+		 */
+
+		if (order.equalsIgnoreCase("Pizza")) {
+			return new Pizza();
+		} else if (order.equalsIgnoreCase("Cake")) {
+			return new Cake();
+		}
+		return null;
+
+		/** main code end herer */
+
+	}// End of getFood method
+
+}// End of factory class
+
+public class JavaFactoryPattern {
+
+	public static void main(String args[]) {
+		Do_Not_Terminate.forbidExit();
+		Scanner sc = null;
+		try {
+
+			sc = new Scanner(System.in);
+			// creating the factory
+			FoodFactory foodFactory = new FoodFactory();
+
+			// factory instantiates an object
+			Food food = foodFactory.getFood(sc.nextLine());
+
+			System.out.println("The factory returned " + food.getClass());
+			System.out.println(food.getType());
+		} catch (Do_Not_Terminate.ExitTrappedException e) {
+			System.out.println("Unsuccessful Termination!!");
+		} finally {
+			sc.close();
+		}
+	}
+
+}
+
+class Do_Not_Terminate {
+
+	public static class ExitTrappedException extends SecurityException {
+
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static void forbidExit() {
+		final SecurityManager securityManager = new SecurityManager() {
+			@Override
+			public void checkPermission(Permission permission) {
+				if (permission.getName().contains("exitVM")) {
+					throw new ExitTrappedException();
+				}
+			}
+		};
+		System.setSecurityManager(securityManager);
+	}
+} 
+
+
+
+
+// new program 
+import java.security.Permission;
+import java.util.Scanner;
+
+interface Food {
+	public String getType();
+}
+
+class Pizza implements Food {
+	public String getType() {
+		return "Someone ordered a Fast Food!";
+	}
+}
+
+class Cake implements Food {
+
+	public String getType() {
+		return "Someone ordered a Dessert!";
+	}
+}
+
+class FoodFactory {
+	public Food getFood(String order) {
+
+		/**
+		 * main code starts from here
+		 */
+
+		if (order.equalsIgnoreCase("Pizza")) {
+			return new Pizza();
+		} else if (order.equalsIgnoreCase("Cake")) {
+			return new Cake();
+		}
+		return null;
+
+		/** main code end herer */
+
+	}// End of getFood method
+
+}// End of factory class
+
+public class JavaFactoryPattern {
+
+	public static void main(String args[]) {
+		Do_Not_Terminate.forbidExit();
+		Scanner sc = null;
+		try {
+
+			sc = new Scanner(System.in);
+			// creating the factory
+			FoodFactory foodFactory = new FoodFactory();
+
+			// factory instantiates an object
+			Food food = foodFactory.getFood(sc.nextLine());
+
+			System.out.println("The factory returned " + food.getClass());
+			System.out.println(food.getType());
+		} catch (Do_Not_Terminate.ExitTrappedException e) {
+			System.out.println("Unsuccessful Termination!!");
+		} finally {
+			sc.close();
+		}
+	}
+
+}
+
+class Do_Not_Terminate {
+
+	public static class ExitTrappedException extends SecurityException {
+
+		private static final long serialVersionUID = 1L;
+	}
+
+	public static void forbidExit() {
+		final SecurityManager securityManager = new SecurityManager() {
+			@Override
+			public void checkPermission(Permission permission) {
+				if (permission.getName().contains("exitVM")) {
+					throw new ExitTrappedException();
+				}
+			}
+		};
+		System.setSecurityManager(securityManager);
+	}
+}
