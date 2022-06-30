@@ -1,0 +1,54 @@
+
+NON ELAB QUESTION
+SCENARIO BASED QUESTION 
+PROBLEM STATEMENT:
+A structure contains name of cricketer, his age, and number of test matches that he has played and the average runs that he has scored in each test match. Create an array of structure to hold records of 20 such cricketer and then write a program to read these records and arrange them in ascending order by average runs and write the sorted details in a file ('cricketer.txt')  
+ALGORITHIM:
+START
+Step1: include header files.
+Step2: declare structure.
+Step3: declare a character array to store a string and variables for age, test and average runs.
+STEP4: create a function compare.
+Step5: return  (((struct record *)a)->avg_runs-((struct record *)b)->avg_runs).
+Step6: Create main function.
+Step7: declare loop variable i.
+Step8: store all the details in the structure.
+Step9: use q sort to sort the structure. 
+Step10: print the sorted structure. 
+END
+CODE :
+#include<stdio.h>
+#include<stdlib.h>
+
+
+struct record
+{
+char name[20];
+int age;
+int tests;
+int avg_runs;
+};
+
+int compare (const void * a, const void * b)
+{
+return (((struct record *)a)->avg_runs-((struct record *)b)->avg_runs);
+}
+
+void main()
+{
+int i;
+struct record player[20]={
+{"K L Rahul", 20, 5, 37},
+{"Rohit Sharma", 35, 112, 65},
+{"Virat Kohli", 32, 108, 55},
+{"M S Dhoni", 40, 134, 31},
+{"Hardik Pandya", 22, 10, 25}
+};
+qsort(player,5,sizeof(struct record),compare);
+printf("%16s%10s%6s%16s%16s\n","Player Name","Age","","No of Test Matches","Average Runs");
+for(i=0;i<5;i++) printf("%16s%10d%6s%16d%16d\n",player[i].name,player[i].age,"",player[i].tests,player[i].avg_runs);
+getc;
+} 
+
+
+ 
